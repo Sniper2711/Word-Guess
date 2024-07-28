@@ -32,21 +32,21 @@ CompilerSettings=0000000000000000001000000
 UnitCount=3
 
 [VersionInfo]
-Major=0
+Major=1
 Minor=0
 Release=0
-Build=37
+Build=0
 LanguageID=2052
 CharsetID=1252
 CompanyName=
-FileVersion=0.0.0.37
+FileVersion=1.0.0.0
 FileDescription=╡б╢йсно╥
 InternalName=
 LegalCopyright=
 LegalTrademarks=
 OriginalFilename=
 ProductName=╡б╢йсно╥
-ProductVersion=0.0.0.37
+ProductVersion=1.0.0.0
 AutoIncBuildNr=1
 SyncProduct=1
 
