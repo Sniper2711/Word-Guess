@@ -48,7 +48,6 @@ advertising
 advice
 advise
 advisable
-aeroplane
 affect
 afford
 afraid
@@ -62,6 +61,8 @@ agency
 agent
 agree
 aim
+air-conditioner
+air-conditioned
 airline
 airliner
 airport
@@ -106,7 +107,7 @@ anyway
 anywhere
 apart
 apartment
-apologise
+apologize
 apology
 appear
 appearance
@@ -275,7 +276,7 @@ bold
 bomb
 bone
 book
-cookcase
+bookcase
 booking
 bookshelf
 bookshop
@@ -512,7 +513,7 @@ comparison
 compete
 competitor
 competition
-cpmplain
+complain
 complaint
 complete
 completely
@@ -580,7 +581,7 @@ couple
 courage
 course
 court
-coutship
+courtship
 cousin
 cover
 covering
@@ -608,7 +609,7 @@ cultivate
 cultural
 cure
 curious
-curiosly
+curiously
 curly
 current
 currency
@@ -653,7 +654,7 @@ deeply
 deer
 defeat
 defend
-defence
+defense
 definitely
 degree
 delay
@@ -677,7 +678,7 @@ deposit
 depressed
 descend
 describe
-descirption
+description
 desert
 deserted
 deserve
@@ -689,10 +690,10 @@ destination
 destroy
 detail
 detective
-devalop
-devalopment
-devaloped
-devaloping
+develop
+development
+developed
+developing
 dial
 diary
 dictionary
@@ -824,7 +825,7 @@ ending
 enemy
 energy
 engage
-engeged
+engaged
 engine
 engineer
 engineering
@@ -934,8 +935,8 @@ feeling
 female
 fence
 ferry
-fastival
-fastive
+festival
+festive
 fetch
 fever
 few
@@ -1080,7 +1081,7 @@ golf
 good
 goodbye
 govern
-goverment
+government
 governing
 gram
 grammar
@@ -1115,7 +1116,6 @@ hall
 hand
 handheld
 handbag
-handchief
 handle
 handsome
 hang
@@ -1171,7 +1171,7 @@ hobby
 hockey
 hold
 hole
-hoilday
+holiday
 home
 homework
 honest

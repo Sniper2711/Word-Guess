@@ -33,26 +33,27 @@ char judgeResult(int len, int cnt, int hp) {
 	switch(hp) {
 		case 9:
 		case 8:
-			if(percent <= 0.4) return 'V';
-			else if(percent > 0.4 && percent <= 0.45) return 'S';
+			if(percent <= 0.6) return 'V';
+			else if(percent > 0.6 && percent <= 0.725) return 'S';
 			else return 'A';
 			break;
 		case 7:
 		case 6:
 		case 5:
-			if(percent <= 0.45) return 'S';
-			else if(percent > 0.45 && percent <= 0.725) return 'A';
+			if(percent <= 0.6) return 'S';
+			else if(percent > 0.6 && percent <= 0.725) return 'A';
 			else return 'B';
 			break;
 		case 4:
 		case 3:
-			if(percent <= 0.45) return 'A';
-			else if(percent > 0.45 && percent <= 0.725) return 'B';
+			if(percent <= 0.6) return 'A';
+			else if(percent > 0.6 && percent <= 0.725) return 'B';
 			else return 'C';
 			break;
 		case 2:
 		case 1:
-			return 'C';
+			if(percent <= 0.75) return 'B';
+			else return 'C';
 			break;
 	}
 }
