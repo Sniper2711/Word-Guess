@@ -5,8 +5,8 @@ CPP      = g++.exe -D__DEBUG__
 CC       = gcc.exe -D__DEBUG__
 WINDRES  = windres.exe
 RES      = Word-Guess_private.res
-OBJ      = src/wordGuess.o $(RES)
-LINKOBJ  = src/wordGuess.o $(RES)
+OBJ      = src/WordGuess.o $(RES)
+LINKOBJ  = src/WordGuess.o $(RES)
 LIBS     = -L"S:/Dev-Cpp/MinGW64/lib" -L"S:/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc -g3
 INCS     = -I"S:/Dev-Cpp/MinGW64/include" -I"S:/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"S:/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
 CXXINCS  = -I"S:/Dev-Cpp/MinGW64/include" -I"S:/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"S:/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"S:/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
@@ -25,8 +25,8 @@ clean: clean-custom
 $(BIN): $(OBJ)
 	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
 
-src/wordGuess.o: src/wordGuess.cpp
-	$(CPP) -c src/wordGuess.cpp -o src/wordGuess.o $(CXXFLAGS)
+src/WordGuess.o: src/WordGuess.cpp
+	$(CPP) -c src/WordGuess.cpp -o src/WordGuess.o $(CXXFLAGS)
 
 Word-Guess_private.res: Word-Guess_private.rc 
 	$(WINDRES) -i Word-Guess_private.rc --input-format=rc -o Word-Guess_private.res -O coff 

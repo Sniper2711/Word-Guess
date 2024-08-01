@@ -29,29 +29,39 @@ IncludeVersionInfo=1
 SupportXPThemes=0
 CompilerSet=0
 CompilerSettings=00000000g0000000001000000
-UnitCount=3
+UnitCount=4
 
 [VersionInfo]
 Major=1
-Minor=0
-Release=0
-Build=80
+Minor=1
+Release=1
+Build=99
 LanguageID=2052
 CharsetID=1252
 CompanyName=
-FileVersion=1.0.0.80
+FileVersion=1.1.1.99
 FileDescription=Word-Guess Main Program
 InternalName=
 LegalCopyright=
 LegalTrademarks=
 OriginalFilename=
 ProductName=Word-Guess Game
-ProductVersion=1.0.0.80
+ProductVersion=1.1.1.99
 AutoIncBuildNr=1
 SyncProduct=1
 
 [Unit2]
-FileName=src\rank.h
+FileName=src\WordGuess.cpp
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit4]
+FileName=src\Rank.h
 CompileCpp=1
 Folder=
 Compile=1
@@ -61,7 +71,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit3]
-FileName=src\wordGuess.cpp
+FileName=src\Header.h
 CompileCpp=1
 Folder=
 Compile=1
@@ -71,7 +81,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit1]
-FileName=src\header.h
+FileName=src\GameEvent.h
 CompileCpp=1
 Folder=
 Compile=1

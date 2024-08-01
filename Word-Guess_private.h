@@ -5,19 +5,19 @@
 #define WORD-GUESS_PRIVATE_H
 
 /* VERSION DEFINITIONS */
-#define VER_STRING	"1.0.0.80"
+#define VER_STRING	"1.1.1.99"
 #define VER_MAJOR	1
-#define VER_MINOR	0
-#define VER_RELEASE	0
-#define VER_BUILD	80
+#define VER_MINOR	1
+#define VER_RELEASE	1
+#define VER_BUILD	99
 #define COMPANY_NAME	""
-#define FILE_VERSION	"1.0.0.80"
+#define FILE_VERSION	"1.1.1.99"
 #define FILE_DESCRIPTION	"Word-Guess Main Program"
 #define INTERNAL_NAME	""
 #define LEGAL_COPYRIGHT	""
 #define LEGAL_TRADEMARKS	""
 #define ORIGINAL_FILENAME	""
 #define PRODUCT_NAME	"Word-Guess Game"
-#define PRODUCT_VERSION	"1.0.0.80"
+#define PRODUCT_VERSION	"1.1.1.99"
 
 #endif /*WORD-GUESS_PRIVATE_H*/
