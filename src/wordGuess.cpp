@@ -47,6 +47,12 @@ int main() {
 					UserError("无效的猜测:提示未解锁或已使用。\n本次猜测不计数。");
 				}
 			}
+			else if(curr[0] == '1') {
+				showHelp();
+			}
+			else if(curr[0] == '2') {
+				showHelp(1);
+			}
 			else if(!isalpha(curr[0])) {
 				UserError("无效的猜测:输入字符非字母。\n本次猜测不计数。");
 			}
@@ -54,21 +60,19 @@ int main() {
 				UserError("无效的猜测:你已经猜过这个字母了。\n本次猜测不计数。");
 			}
 			else {
-				char curro = isupper(curr[0]) ? tolower(curr[0]) : toupper(curr[0]);
-				guessed[curr[0]] = guessed[curro] = true;
-				int ret = update(curr[0]);
-				ret += update(curro);
-				if(ret != 0) {
-					cnt += ret;
-					CLS;
-					printf("正确! 单词中共包含%d个字母%c或%c。\n", ret, char(toupper(curro)), char(tolower(curro)));
+				guessed[toupper(curr[0])] = guessed[tolower(curr[0])] = true;
+				int retU = update(toupper(curr[0]));
+				int retL = update(tolower(curr[0]));
+				CLS;
+				if(retL + retU != 0) {
+					cnt += retU + retL;
+					printf("正确! 单词中共包含%d个字母%c和%d个字母%c。\n", retU, char(toupper(curr[0])), retL, char(tolower(curr[0])));
 					printf("还有%d个未知字母。", clen - cnt);
 					if(settings["Flash"] == "1") dis_color(true, 1250);
 					else Sleep(1250);
 				}
 				else {
 					hp--;
-					CLS;
 					cout << "错误! 失去1点生命值。";
 					if(settings["Flash"] == "1") dis_color(false);
 					else Sleep(1000);
@@ -93,17 +97,17 @@ int main() {
 					continue;
 				}
 				else {
-					cout << "猜词失败，失去1点生命值";
+					cout << "猜词失败，失去2点生命值";
 					if(settings["Flash"] == "1") dis_color(false);
 					else Sleep(1000);
-					hp--;
+					hp -= 2;
 				}
 			}
 		}
 		CLS;
 		if(settings["Debug"] == "1") showDebugInfo();
-		printf("单词字母个数: %d\n", clen);
 		printf("当前生命值: %d/10\n", hp);
+		printf("猜出字母/总字母个数: %d/%d (%d%%)\n", cnt, clen, cnt * 100 / clen);
 		for(int i = 0;i < len;i++) {
 			if(Corr[i]) cout << word[i];
 			else cout << '_';
@@ -112,13 +116,15 @@ int main() {
 		for(char c = 'a';c <= 'z';c++) {
 			if(guessed[c]) cout << c << ' ';
 		}
-		cout << endl << "如果你有把握直接猜出词语，输入词语并回车确定。\n" << endl;
+		cout << endl << "如果你有把握直接猜出词语，输入词语并回车确定。" << endl;
+		cout << "尽量更早地猜出整个词语，就能获得更高的评级。\n" << endl;
+		cout << "**如果需要阅读帮助信息，请输入1**";
 		if(hp <= 5 && clen - cnt > 2 && !hintUsed) {
 			hintUnlock = true;
 			cout << endl << "**提示已解锁，需要提示请输入0**";
 		}
 		else hintUnlock = false;
-		cout << endl << "请输入单个字母或整个单词(0表示提示):";
+		cout << endl << "请输入单个字母(猜测)/整个单词(直接猜词)/数字命令(详见帮助):";
 	}
 	return 0;
 }

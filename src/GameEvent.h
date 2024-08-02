@@ -32,7 +32,7 @@ void launchInit() {
 		exit(1);
 	}
 	while(getline(ifs, temp)) {
-		if(temp.length() <= 4 || temp.length() >= 21) continue;
+		if(temp.length() <= 4 || temp.length() >= 16) continue; // Single word length: 5-15
 		words.push_back(temp);
 		if(ifs.eof()) break;
 	}
@@ -42,16 +42,19 @@ void launchInit() {
 		cout << "**您已开启屏幕闪烁**" << endl;
 		cout << "**你也可以在settings.txt中调整闪烁画面的开关。**\n" << endl;
 		cout << "光敏性癫痫警告:" << endl;
-		cout << "部分人群在游玩游戏时，如果看到特定的闪烁画面或受到刺激，可能出现类似癫痫一类的症状。" << endl;
-		cout << "如果你在游戏中感到任何身体不适，包括但不限于：头晕、恶心、乏力、身体不受自主控制等" << endl;
-		cout << "请立即停止游戏，如有需要，请咨询您的医师。" << endl;
-		Sleep(3000);
+		cout << "在特殊光线或灯光闪烁的刺激下，极个别人可能出现癫痫症状。" << endl;
+		cout << "同时，当看到屏幕上的某类背景或图像以及玩某些游戏时，这类人有可能被诱发癫痫症状。" << endl;
+		cout << "如果你在游戏中感到任何身体不适，包括但不限于以下症状：" << endl;
+		cout << "头晕、视线模糊、眼部或肌肉抽搐、失去知觉、失去方向感、不由自主地移动、抽搐等" << endl;
+		cout << "请立即停止游戏，如有需要，请咨询医生的建议。\n" << endl;
+		system("pause");
 	}
 	CLS;
 	cout << "欢迎游玩猜词游戏!" << endl;
-	cout << "通过猜测一个单词中可能有的字符获胜，包括字母、符号" << endl;
+	cout << "游玩技巧: 猜测单词中可能有的字母，确定整个单词后进行最终猜测。" << endl;
+	cout << "获取更多帮助信息，请稍后输入1。" << endl;
 	cout << "调整设置请至源文件目录下的settings.txt查看详情。" << endl;
-	Sleep(1250);
+	Sleep(2000);
 }
 void start() {
 	cnt = 0, hp = 10;
@@ -79,8 +82,9 @@ void start() {
 	cout << '.';
 	CLS;
 	if(settings["Debug"] == "1") showDebugInfo();
-	printf("你拥有%d点初始生命值。它归零时，游戏失败。\n", hp);
-	cout << "当且仅当生命值低于6，未知字母有3个及以上时，提示将解锁。提示仅可使用一次。\n" << endl;
+	cout << "游 戏 开 始!" << endl;
+	cout << "**如果需要阅读帮助信息，请输入1**" << endl;
+	cout << "初始生命值: 10" << endl;
 	cout << "单词字母个数: " << clen << endl;
 	for(int i = 0;i < len;i++) {
 		if(!isalpha(word[i])) cout << word[i];
@@ -96,7 +100,7 @@ void ending(string message, bool win = true) {
 	cout << word << endl;
 	printf("生命值: %d/10\n", hp);
 	printf("猜出字母: %d/%d (%d%%)\n", cnt, clen, (cnt * 100 / clen));
-	cout << "评级.";
+	cout << "等阶/评级.";
 	Sleep(500);
 	cout << '.';
 	Sleep(500);
@@ -105,41 +109,48 @@ void ending(string message, bool win = true) {
 	switch(judge) {
 		case 'P':
 			if(settings["Flash"] == "1") system("color E0");
-			AP();
-			cout << "   All Perfect!!!" << endl;
-			cout << "在所有评级中，这个评级的排名是: 1st!!!" << endl;
+			Perfect();
+			PC();
+			cout << "   Perfect - Perfectly Clear!!!" << endl;
+			cout << "在所有评级中，这个评级的排名是: 1st!!!\n" << endl;
 			break;
-		case 'V':
+		case 'E':
 			if(settings["Flash"] == "1") system("color 90");
-			V();
-			cout << "        V级!!" << endl;
-			cout << "在所有评级中，这个评级的排名是: 2nd!!" << endl;
+			Perfect();
+			Ex();
+			cout << "   Perfect - Extreme!!" << endl;
+			cout << "在所有评级中，这个评级的排名是: 2nd!!\n" << endl;
 			break;
 		case 'S':
 			if(settings["Flash"] == "1") system("color B0");
+			Perfect();
 			S();
-			cout << "        S级!" << endl;
-			cout << "在所有评级中，这个评级的排名是: 3rd!" << endl;
+			cout << "   Perfect - S!" << endl;
+			cout << "在所有评级中，这个评级的排名是: 3rd!\n" << endl;
 			break;
 		case 'A':
+			Good();
 			A();
-			cout << "        A级" << endl;
-			cout << "在所有评级中，这个评级的排名是: 4th" << endl;
+			cout << "      Good - A" << endl;
+			cout << "在所有评级中，这个评级的排名是: 4th\n" << endl;
 			break;
 		case 'B':
+			Good();
 			B();
-			cout << "        B级" << endl;
-			cout << "在所有评级中，这个评级的排名是: 5th" << endl;
+			cout << "      Good - B" << endl;
+			cout << "在所有评级中，这个评级的排名是: 5th\n" << endl;
 			break;
 		case 'C':
+			Good();
 			C();
-			cout << "        C级" << endl;
-			cout << "在所有评级中，这个评级的排名是: 6th" << endl;
+			cout << "      Good - C" << endl;
+			cout << "在所有评级中，这个评级的排名是: 6th\n" << endl;
 			break;
 		case 'F':
 			if(settings["Flash"] == "1") system("color C0");
+			Fail();
 			F();
-			cout << "     F级，失败" << endl;
+			cout << "      Fail - F" << endl;
 			break;
 	}
 	cout << "退出游戏请关闭窗口，按任意键重新开始。" << endl;

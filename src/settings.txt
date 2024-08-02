@@ -10,7 +10,7 @@
 #下载地址: https://github.com/Sniper2711/Word-Guess/releases
 
 
-#Flash(1): 控制猜词时是否闪烁屏幕提示正误
+#Flash(1): 控制猜测/猜词/展示评级时是否闪烁屏幕
 Flash=1
 
 #Debug(0): 调试模式，仅供开发者使用，开启后能够实时监控变量和程序状态

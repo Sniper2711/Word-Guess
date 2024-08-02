@@ -1,35 +1,61 @@
 #include <iostream>
 #include <windows.h>
 using namespace std;
-void AP() {
-	cout << "      -  -----" << endl;
-	cout << "     -   -    -" << endl;
-	cout << "    -    -    -" << endl;
-	cout << "   -     -    -" << endl;
-	cout << "  -      -    -" << endl;
-	cout << " --------- --- " << endl;
-	cout << "         -" << endl;
-	cout << "         -" << endl;
-	cout << "         -" << endl;
-	cout << "         -" << endl;
+void Perfect() {
+	cout << "    --------                         --------                           -" << endl;
+	cout << "    -      -                         -                                  -" << endl;
+	cout << "    -      -   --------   --------   -         --------   --------   -------" << endl;
+	cout << "    --------   -      -   -          -------   -      -   -             -" << endl;
+	cout << "    -          --------   -          -         --------   -             -" << endl;
+	cout << "    -          -          -          -         -          -             -" << endl;
+	cout << "    -          --------   -          -         --------   --------      ---" << endl << endl;
 }
-void V() {
-	cout << "  -             -" << endl;
-	cout << "   -           -" << endl;
-	cout << "    -         -" << endl;
-	cout << "     -       -" << endl;
-	cout << "      -     -" << endl;
-	cout << "       -   -" << endl;
-	cout << "          -" << endl;
-	cout << "         -" << endl;
+void Good() {
+	cout << "    --------                                -" << endl;
+	cout << "    -                                       -" << endl;
+	cout << "    -                                       -" << endl;
+	cout << "    -   ----   --------   --------   --------" << endl;
+	cout << "    -      -   -      -   -      -   -      -" << endl;
+	cout << "    -      -   -      -   -      -   -      -" << endl;
+	cout << "    --------   --------   --------   --------" << endl << endl;
+}
+void Fail() {
+	cout << "    --------                          --" << endl;
+	cout << "    -                                  -" << endl;
+	cout << "    -                        -         -" << endl;
+	cout << "    ------     ------        -         -" << endl;
+	cout << "    -          -    -        -         -" << endl;
+	cout << "    -          -    -        -         - -" << endl;
+	cout << "    -          ----- --      -         --" << endl << endl;
+}
+void PC() {
+	cout << "    ---------   ----------" << endl;
+	cout << "    -       -   -" << endl;
+	cout << "    -       -   -" << endl;
+	cout << "    -       -   -" << endl;
+	cout << "    ---------   -" << endl;
+	cout << "    -           -" << endl;
+	cout << "    -           -" << endl;
+	cout << "    -           -" << endl;
+	cout << "    -           ----------" << endl;
+}
+void Ex() {
+	cout << "    ---------" << endl;
+	cout << "    -" << endl;
+	cout << "    -           -     -" << endl;
+	cout << "    -            -   -" << endl;
+	cout << "    -------       - -" << endl;
+	cout << "    -              -" << endl;
+	cout << "    -             - -" << endl;
+	cout << "    -            -   -" << endl;
+	cout << "    ---------   -     -" << endl;
 }
 void S() {
-	cout << "     - ------" << endl;
+	cout << "     --------" << endl;
 	cout << "    -" << endl;
 	cout << "    -" << endl;
 	cout << "    -" << endl;
 	cout << "     --------" << endl;
-	cout << "             -" << endl;
 	cout << "             -" << endl;
 	cout << "             -" << endl;
 	cout << "             -" << endl;
@@ -41,13 +67,13 @@ void A() {
 	cout << "       -   -" << endl;
 	cout << "      -     -" << endl;
 	cout << "     -       -" << endl;
-	cout << "    -  --------" << endl;
+	cout << "    -----------" << endl;
 	cout << "   -           -" << endl;
 	cout << "  -             -" << endl;
 	cout << " -               -" << endl;
 }
 void B() {
-	cout << "    - --------" << endl;
+	cout << "    ----------" << endl;
 	cout << "    -         -" << endl;
 	cout << "    -         -" << endl;
 	cout << "    -         -" << endl;
@@ -58,7 +84,7 @@ void B() {
 	cout << "    ----------" << endl;
 }
 void C() {
-	cout << "    - ---------" << endl;
+	cout << "    -----------" << endl;
 	cout << "   -" << endl;
 	cout << "   -" << endl;
 	cout << "   -" << endl;
