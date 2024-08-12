@@ -29,6 +29,7 @@ void launchInit() {
 		cout << "[Critical] Failed to open input file:Error opening words input file" << endl;
 		cout << "发生致命错误，程序无法继续运行。" << endl;
 		Sleep(3000);
+		system("pause");
 		exit(1);
 	}
 	while(getline(ifs, temp)) {
@@ -75,22 +76,17 @@ void start() {
 	}
 	CLS;
 	system("color 07");
-	cout << "正在抽选词汇.";
-	Sleep(250);
-	cout << '.';
-	Sleep(250);
-	cout << '.';
-	CLS;
 	if(settings["Debug"] == "1") showDebugInfo();
 	cout << "游 戏 开 始!" << endl;
-	cout << "**如果需要阅读帮助信息，请输入1**" << endl;
 	cout << "初始生命值: 10" << endl;
 	cout << "单词字母个数: " << clen << endl;
+	cout << "单词状态: ";
 	for(int i = 0;i < len;i++) {
 		if(!isalpha(word[i])) cout << word[i];
 		else cout << '_';
 	}
-	cout << endl << "请输入单个字母或整个单词(0表示提示):";
+	cout << endl << "\n**如果不知道怎么玩，请输入1**";
+	cout << endl << "请输入单个字母(猜测)/整个单词(直接猜词)/数字命令(详见帮助):";
 }
 void ending(string message, bool win = true) {
 	CLS;
@@ -118,7 +114,7 @@ void ending(string message, bool win = true) {
 			if(settings["Flash"] == "1") system("color 90");
 			Perfect();
 			Ex();
-			cout << "   Perfect - Extreme!!" << endl;
+			cout << "   Perfect - Excellent!!" << endl;
 			cout << "在所有评级中，这个评级的排名是: 2nd!!\n" << endl;
 			break;
 		case 'S':
@@ -151,6 +147,11 @@ void ending(string message, bool win = true) {
 			Fail();
 			F();
 			cout << "      Fail - F" << endl;
+			break;
+		case 'U':
+			U();
+			cout << "      Unknown" << endl;
+			cout << "在所有评级中，这个评级的排名是: order.2147483647" << endl;
 			break;
 	}
 	cout << "退出游戏请关闭窗口，按任意键重新开始。" << endl;

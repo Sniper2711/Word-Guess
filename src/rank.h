@@ -105,3 +105,14 @@ void F() {
 	cout << "    -" << endl;
 	cout << "    -" << endl;
 }
+void U() {
+	cout << "    -         -" << endl;
+	cout << "    -         -" << endl;
+	cout << "    -         -" << endl;
+	cout << "    -         -" << endl;
+	cout << "    -         -" << endl;
+	cout << "    -         -" << endl;
+	cout << "    -         -" << endl;
+	cout << "    -         -" << endl;
+	cout << "     ---------" << endl;
+}
