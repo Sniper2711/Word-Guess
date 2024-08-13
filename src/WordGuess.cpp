@@ -17,7 +17,6 @@ int main() {
 			continue;
 		}
 		else if(gs == -1) {
-			hp = 0;
 			ending("Ê§°Ü£¬ÉúÃüÖµÒÑ¹éÁã", false);
 			start();
 			continue;

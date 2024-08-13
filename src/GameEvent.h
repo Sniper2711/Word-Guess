@@ -148,10 +148,10 @@ void ending(string message, bool win = true) {
 			F();
 			cout << "      Fail - F" << endl;
 			break;
-		case 'U':
+		default:
 			U();
 			cout << "      Unknown" << endl;
-			cout << "在所有评级中，这个评级的排名是: order.2147483647" << endl;
+			cout << "未知的评级，如果调试模式未开启，请向作者反馈此问题" << endl;
 			break;
 	}
 	cout << "退出游戏请关闭窗口，按任意键重新开始。" << endl;

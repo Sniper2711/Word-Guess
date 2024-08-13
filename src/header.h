@@ -66,10 +66,10 @@ void showHelp(int type = 1) {
 			cout << "Ê£ÓàÉúÃüÖµ  ÆÀ¼¶" << endl;
 			cout << "10          PC" << endl;
 			cout << "9           Ex" << endl;
-			cout << "8--7        S" << endl;
-			cout << "6--5        A" << endl;
-			cout << "4--3        B" << endl;
-			cout << "2--1        C" << endl;
+			cout << "8           S" << endl;
+			cout << "7--6        A" << endl;
+			cout << "5--4        B" << endl;
+			cout << "3--1        C" << endl;
 			cout << "0           F" << endl;
 			system("pause");
 			break;
@@ -88,10 +88,10 @@ int update(char t) {
 char judgeResult() {
 	if(hp == 10) return 'P'; // Perfectly Clear
 	else if(hp == 9) return 'E'; // Excellent
-	else if(hp >= 7 && hp <= 8) return 'S';
-	else if(hp >= 5 && hp <= 6) return 'A';
-	else if(hp >= 3 && hp <= 4) return 'B';
-	else if(hp >= 1 && hp <= 2) return 'C';
-	else if(hp <= 0) return 'F'; // Fail
+	else if(hp == 8) return 'S';
+	else if(hp >= 6 && hp <= 7) return 'A';
+	else if(hp >= 4 && hp <= 5) return 'B';
+	else if(hp >= 1 && hp <= 3) return 'C';
+	else if(hp == 0) return 'F'; // Fail
 	else return 'U'; // Unknown
 }
