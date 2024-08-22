@@ -5,7 +5,6 @@
 #include "Rank.h"
 #include "GameEvent.h"
 using namespace std;
-#define CLS system("cls")
 int main() {
 	launchInit();
 	start();
@@ -96,6 +95,7 @@ int main() {
 					}
 					else {
 						cout << "Invaild key and value." << endl;
+						system("pause");
 					}
 				}
 				else if(cmd == "-set") {
@@ -131,6 +131,10 @@ int main() {
 			}
 		}
 		cin.sync();
+		if(hp <= 5 && clen - cnt > 2 && !hintUsed)
+			hintUnlock = true;
+		else
+			hintUnlock = false;
 		CLS;
 		if(settings["Debug"] == "1") showDebugInfo();
 		printf("当前生命值: %d/10\n", hp);
@@ -145,11 +149,7 @@ int main() {
 			if(guessed[c]) cout << c << ' ';
 		}
 		cout << endl << "如果你有把握直接猜出词语，输入词语并回车确定。" << endl;
-		if(hp <= 5 && clen - cnt > 2 && !hintUsed) {
-			hintUnlock = true;
-			cout << endl << "**提示已解锁，需要提示请输入0**";
-		}
-		else hintUnlock = false;
+		if(hintUnlock) cout << "**提示已解锁，需要提示请输入0**" << endl;
 		cout << "**如果不知道怎么玩，请输入1**";
 		cout << endl << "请输入单个字母(猜测)/整个单词(直接猜词)/数字命令(详见帮助):";
 	}

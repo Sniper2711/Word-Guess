@@ -1,6 +1,7 @@
 #include <iostream>
 #include <windows.h>
 using namespace std;
+#define CLS system("cls")
 string word, temp, curr;
 int len, clen, r, cnt, hp = 10;
 bool Corr[15], hintUnlock = false, hintUsed = false;
@@ -13,10 +14,10 @@ void dis_color(bool correct, int mtime = 1000) {
 	Sleep(mtime);
 	system("color 07");
 }
-void UserError(string info, int time = 1000) {
+void UserError(string info, int mtime = 1000) {
 	system("cls");
 	cout << "´íÎó:" << info;
-	Sleep(time);
+	Sleep(mtime);
 }
 int gameStatus() {
 	if(cnt == clen) return 1;
@@ -32,6 +33,7 @@ void showDebugInfo() {
 	printf("Word length and alpha length: %d, %d\n", len, clen);
 	printf("Health: %d\n", hp);
 	printf("Guessed: %d/%d (%d%%)\n", cnt, clen, cnt * 100 / clen);
+	printf("Hint Unlock and Used: %d, %d\n", hintUnlock, hintUsed);
 	cout << "Characters guessed:" << endl;
 	for(int i = 0;i < len;i++) printf("%d ", Corr[i]);
 	cout << endl << "Guessed alphas:" << endl;
@@ -92,6 +94,6 @@ char judgeResult() {
 	else if(hp >= 6 && hp <= 7) return 'A';
 	else if(hp >= 4 && hp <= 5) return 'B';
 	else if(hp >= 1 && hp <= 3) return 'C';
-	else if(hp == 0) return 'F'; // Fail
+	else if(hp == 0 || hp == -1) return 'F'; // Fail
 	else return 'U'; // Unknown
 }
