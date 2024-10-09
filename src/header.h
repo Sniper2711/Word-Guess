@@ -2,6 +2,7 @@
 #include <windows.h>
 using namespace std;
 #define CLS system("cls")
+const bool PRE = true;
 string word, temp, curr;
 int len, clen, r, cnt, hp = 10;
 bool Corr[15], hintUnlock = false, hintUsed = false;
@@ -40,6 +41,7 @@ void showDebugInfo() {
 	for(char c = 'a';c <= 'z';c++) if(guessed[c]) cout << c << ' ';
 	cout << endl << "Settings:" << endl;
 	for(pair<string, string> s : settings) cout << s.first << '=' << s.second << endl;
+	cout << endl << "To view debug command help, enter 3." << endl;
 	cout << "------Debug Info------" << endl;
 }
 void showHelp(int type = 1) {
@@ -66,13 +68,24 @@ void showHelp(int type = 1) {
 			cout << "等阶   Perfect   Good   Fail" << endl;
 			cout << "评级   PC,Ex,S   A--C    F\n" << endl;
 			cout << "剩余生命值  评级" << endl;
-			cout << "10          PC" << endl;
-			cout << "9           Ex" << endl;
-			cout << "8           S" << endl;
-			cout << "7--6        A" << endl;
-			cout << "5--4        B" << endl;
+			cout << "10          Excellent" << endl;
+			cout << "9--7        A" << endl;
+			cout << "6--4        B" << endl;
 			cout << "3--1        C" << endl;
-			cout << "0           F" << endl;
+			cout << "0           Fail" << endl;
+			cout << "其他        Unknown" << endl;
+			system("pause");
+			break;
+		case 3:
+			system("cls");
+			cout << "How to open commend mode: enter \"-cmd\"" << endl;
+			cout << "Argument format: <Name:Type>" << endl;
+			cout << "Mandatory / Optional arguments: <Mandatory>, [Optional]" << endl;
+			cout << "Command usage:" << endl;
+			cout << "-var <key:string> <value> : Assign variable <key:string> of <value>. Assignable variables: hp, hintUsed." << endl;
+			cout << "-set <key:string> <value:string> : Set system setting <key> to <value:string>, custom settings are acceptable(but useless)." << endl;
+			cout << "-show <pos:int> : Show the character at position <pos:int>, nothing happens when <pos:int> points to a non-alpha." << endl;
+			cout << "-hide <pos:int> : Hide the character at position <pos:int>, nothing happens when <pos:int> points to a non-alpha." << endl;
 			system("pause");
 			break;
 	}
@@ -88,11 +101,9 @@ int update(char t) {
 	return ret;
 }
 char judgeResult() {
-	if(hp == 10) return 'P'; // Perfectly Clear
-	else if(hp == 9) return 'E'; // Excellent
-	else if(hp == 8) return 'S';
-	else if(hp >= 6 && hp <= 7) return 'A';
-	else if(hp >= 4 && hp <= 5) return 'B';
+	if(hp == 10) return 'E'; // Excellent
+	else if(hp >= 9 && hp <= 7) return 'A';
+	else if(hp >= 6 && hp <= 4) return 'B';
 	else if(hp >= 1 && hp <= 3) return 'C';
 	else if(hp == 0 || hp == -1) return 'F'; // Fail
 	else return 'U'; // Unknown

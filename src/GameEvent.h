@@ -51,8 +51,8 @@ void launchInit() {
 		system("pause");
 	}
 	CLS;
-	cout << "欢迎游玩猜词游戏!" << endl;
-	cout << "游玩技巧: 猜测单词中可能有的字母，确定整个单词后进行最终猜测。" << endl;
+	cout << "欢迎游玩猜词游戏！" << endl;
+	cout << endl << "游玩技巧: 猜测单词中可能有的字母，确定整个单词后进行最终猜测。" << endl;
 	cout << "获取更多帮助信息，请稍后输入1。" << endl;
 	cout << "调整设置请至源文件目录下的settings.txt查看详情。" << endl;
 	Sleep(2000);
@@ -103,55 +103,32 @@ void ending(string message, bool win = true) {
 	cout << '.' << endl;
 	char judge = judgeResult();
 	switch(judge) {
-		case 'P':
-			if(settings["Flash"] == "1") system("color E0");
-			Perfect();
-			PC();
-			cout << "   Perfect - Perfectly Clear!!!" << endl;
-			cout << "在所有评级中，这个评级的排名是: 1st!!!\n" << endl;
-			break;
 		case 'E':
 			if(settings["Flash"] == "1") system("color 90");
-			Perfect();
 			Ex();
-			cout << "   Perfect - Excellent!!" << endl;
-			cout << "在所有评级中，这个评级的排名是: 2nd!!\n" << endl;
-			break;
-		case 'S':
-			if(settings["Flash"] == "1") system("color B0");
-			Perfect();
-			S();
-			cout << "   Perfect - S!" << endl;
-			cout << "在所有评级中，这个评级的排名是: 3rd!\n" << endl;
+			cout << "   Excellent - 完美" << endl;
 			break;
 		case 'A':
-			Good();
 			A();
-			cout << "      Good - A" << endl;
-			cout << "在所有评级中，这个评级的排名是: 4th\n" << endl;
+			cout << "      A" << endl;
 			break;
 		case 'B':
-			Good();
 			B();
-			cout << "      Good - B" << endl;
-			cout << "在所有评级中，这个评级的排名是: 5th\n" << endl;
+			cout << "      B" << endl;
 			break;
 		case 'C':
-			Good();
 			C();
-			cout << "      Good - C" << endl;
-			cout << "在所有评级中，这个评级的排名是: 6th\n" << endl;
+			cout << "      C" << endl;
 			break;
 		case 'F':
 			if(settings["Flash"] == "1") system("color C0");
-			Fail();
 			F();
-			cout << "      Fail - F" << endl;
+			cout << "      Fail - 失败" << endl;
 			break;
 		default:
 			U();
-			cout << "      Unknown" << endl;
-			cout << "未知的评级，如果调试模式未开启，请向作者反馈此问题" << endl;
+			cout << "      Unknown - 未知" << endl;
+			cout << "**未知的评级，如果调试模式未开启，请向作者反馈此问题**" << endl;
 			break;
 	}
 	cout << "退出游戏请关闭窗口，按任意键重新开始。" << endl;

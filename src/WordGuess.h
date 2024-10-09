@@ -5,7 +5,7 @@
 #include "Rank.h"
 #include "GameEvent.h"
 using namespace std;
-int main() {
+int Main(vector<string>& args) {
 	launchInit();
 	start();
 	while(true) {
