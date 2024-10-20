@@ -2,14 +2,12 @@
 #include <windows.h>
 using namespace std;
 #define CLS system("cls")
-const bool PRE = true;
 string word, temp, curr;
 int len, clen, r, cnt, hp = 10;
 bool Corr[15], hintUnlock = false, hintUsed = false;
 unordered_map<char, bool> guessed;
 unordered_map<string, string> settings;
 vector<string> words;
-ofstream logging;
 void dis_color(bool correct, int mtime = 1000) {
 	system((correct ? "color 27" : "color 47"));
 	Sleep(mtime);
@@ -64,9 +62,6 @@ void showHelp(int type = 1) {
 			break;
 		case 2:
 			system("cls");
-			cout << "等阶与评级的对应: " << endl;
-			cout << "等阶   Perfect   Good   Fail" << endl;
-			cout << "评级   PC,Ex,S   A--C    F\n" << endl;
 			cout << "剩余生命值  评级" << endl;
 			cout << "10          Excellent" << endl;
 			cout << "9--7        A" << endl;
@@ -84,8 +79,6 @@ void showHelp(int type = 1) {
 			cout << "Command usage:" << endl;
 			cout << "-var <key:string> <value> : Assign variable <key:string> of <value>. Assignable variables: hp, hintUsed." << endl;
 			cout << "-set <key:string> <value:string> : Set system setting <key> to <value:string>, custom settings are acceptable(but useless)." << endl;
-			cout << "-show <pos:int> : Show the character at position <pos:int>, nothing happens when <pos:int> points to a non-alpha." << endl;
-			cout << "-hide <pos:int> : Hide the character at position <pos:int>, nothing happens when <pos:int> points to a non-alpha." << endl;
 			system("pause");
 			break;
 	}
@@ -102,9 +95,9 @@ int update(char t) {
 }
 char judgeResult() {
 	if(hp == 10) return 'E'; // Excellent
-	else if(hp >= 9 && hp <= 7) return 'A';
-	else if(hp >= 6 && hp <= 4) return 'B';
-	else if(hp >= 1 && hp <= 3) return 'C';
+	else if(hp <= 9 && hp >= 7) return 'A';
+	else if(hp <= 6 && hp >= 4) return 'B';
+	else if(hp <= 1 && hp >= 3) return 'C';
 	else if(hp == 0 || hp == -1) return 'F'; // Fail
 	else return 'U'; // Unknown
 }

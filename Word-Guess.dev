@@ -29,24 +29,24 @@ IncludeVersionInfo=1
 SupportXPThemes=0
 CompilerSet=0
 CompilerSettings=00000000c0000000001000000
-UnitCount=5
+UnitCount=6
 
 [VersionInfo]
 Major=1
 Minor=3
-Release=4
-Build=159
+Release=5
+Build=162
 LanguageID=2052
 CharsetID=1252
 CompanyName=
-FileVersion=1.3.4.159
+FileVersion=1.3.5.162
 FileDescription=Word-Guess Main Program
 InternalName=
 LegalCopyright=
 LegalTrademarks=
 OriginalFilename=
 ProductName=Word-Guess Game
-ProductVersion=1.3.4.159
+ProductVersion=1.3.5.162
 AutoIncBuildNr=1
 SyncProduct=1
 
@@ -92,6 +92,16 @@ BuildCmd=
 
 [Unit5]
 FileName=src\WordGuess.h
+CompileCpp=1
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit6]
+FileName=src\Settings.h
 CompileCpp=1
 Folder=
 Compile=1

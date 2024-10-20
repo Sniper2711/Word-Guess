@@ -13,14 +13,13 @@ void launchInit() {
 		system("pause");
 		exit(1);
 	}
-	while(getline(ifs, temp)) {
+	while(!ifs.eof() && getline(ifs, temp)) {
 		if(temp[0] == '#') continue;
 		for(int i = 0;i < temp.length();i++) {
 			if(temp[i] == '=') {
 				settings[temp.substr(0, i)] = temp.substr(i+1);
 			}
 		}
-		if(ifs.eof()) break;
 	}
 	ifs.close();
 	if(settings["Debug"] == "1") ifs.open(settings["DebugInputFile"]);
@@ -32,10 +31,9 @@ void launchInit() {
 		system("pause");
 		exit(1);
 	}
-	while(getline(ifs, temp)) {
+	while(!ifs.eof() && getline(ifs, temp)) {
 		if(temp.length() <= 4 || temp.length() >= 16) continue; // Single word length: 5-15
 		words.push_back(temp);
-		if(ifs.eof()) break;
 	}
 	ifs.close();
 	CLS;
@@ -108,18 +106,6 @@ void ending(string message, bool win = true) {
 			Ex();
 			cout << "   Excellent - 完美" << endl;
 			break;
-		case 'A':
-			A();
-			cout << "      A" << endl;
-			break;
-		case 'B':
-			B();
-			cout << "      B" << endl;
-			break;
-		case 'C':
-			C();
-			cout << "      C" << endl;
-			break;
 		case 'F':
 			if(settings["Flash"] == "1") system("color C0");
 			F();
@@ -128,7 +114,7 @@ void ending(string message, bool win = true) {
 		default:
 			U();
 			cout << "      Unknown - 未知" << endl;
-			cout << "**未知的评级，如果调试模式未开启，请向作者反馈此问题**" << endl;
+			cout << "**请注意：未知的评级，如果调试模式未开启，请向作者反馈此问题**" << endl;
 			break;
 	}
 	cout << "退出游戏请关闭窗口，按任意键重新开始。" << endl;

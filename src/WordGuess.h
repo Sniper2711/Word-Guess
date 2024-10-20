@@ -52,6 +52,9 @@ int Main(vector<string>& args) {
 			else if(curr[0] == '2') {
 				showHelp(2);
 			}
+			else if(curr[0] == '3') {
+				showHelp(3);
+			}
 			else if(!isalpha(curr[0])) {
 				UserError("无效的猜测:输入字符非字母。\n本次猜测不计数。");
 			}
@@ -79,7 +82,7 @@ int Main(vector<string>& args) {
 			}
 		}
 		else {
-			if(curr == "-cmd") {
+			if(curr == "-") {
 				string cmd;
 				cout << endl << ">>";
 				cin >> cmd;
