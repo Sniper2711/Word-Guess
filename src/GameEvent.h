@@ -106,6 +106,15 @@ void ending(string message, bool win = true) {
 			Ex();
 			cout << "   Excellent - ÍêÃÀ" << endl;
 			break;
+		case 'A':
+			A();
+			break;
+		case 'B':
+			B();
+			break;
+		case 'C':
+			C();
+			break;
 		case 'F':
 			if(settings["Flash"] == "1") system("color C0");
 			F();

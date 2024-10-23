@@ -22,67 +22,7 @@ int Main(vector<string>& args) {
 		}
 		getline(cin, curr);
 		if(curr.length() == 1) {
-			if(curr[0] == '0') {
-				if(hintUnlock) {
-					char target, targeto;
-					for(int i = 0;i < len;i++) {
-						if(!Corr[i]) {
-							target = word[i];
-							targeto = isupper(target) ? tolower(target) : toupper(target);
-							break;
-						}
-					}
-					guessed[target] = guessed[targeto] = true;
-					int ret = update(target);
-					ret += update(targeto);
-					cnt += ret;
-					hintUsed = true;
-					CLS;
-					printf("提示已使用，单词中共包含%d个字母%c或%c。\n", ret, char(toupper(target)), char(tolower(target)));
-					printf("还有%d个未知字母。", clen - cnt);
-					Sleep(1500);
-				}
-				else {
-					UserError("无效的猜测:提示未解锁或已使用。\n本次猜测不计数。");
-				}
-			}
-			else if(curr[0] == '1') {
-				showHelp();
-			}
-			else if(curr[0] == '2') {
-				showHelp(2);
-			}
-			else if(curr[0] == '3') {
-				showHelp(3);
-			}
-			else if(!isalpha(curr[0])) {
-				UserError("无效的猜测:输入字符非字母。\n本次猜测不计数。");
-			}
-			else if(guessed[curr[0]]) {
-				UserError("无效的猜测:你已经猜过这个字母了。\n本次猜测不计数。");
-			}
-			else {
-				guessed[toupper(curr[0])] = guessed[tolower(curr[0])] = true;
-				int retU = update(toupper(curr[0]));
-				int retL = update(tolower(curr[0]));
-				CLS;
-				if(retL + retU != 0) {
-					cnt += retU + retL;
-					printf("正确! 单词中共包含%d个字母%c和%d个字母%c。\n", retU, char(toupper(curr[0])), retL, char(tolower(curr[0])));
-					printf("还有%d个未知字母。", clen - cnt);
-					if(settings["Flash"] == "1") dis_color(true, 1250);
-					else Sleep(1250);
-				}
-				else {
-					hp--;
-					cout << "错误! 失去1点生命值。";
-					if(settings["Flash"] == "1") dis_color(false);
-					else Sleep(1000);
-				}
-			}
-		}
-		else {
-			if(curr == "-") {
+			if(settings["Debug"] == "1" && curr == "-") {
 				string cmd;
 				cout << endl << ">>";
 				cin >> cmd;
@@ -101,35 +41,79 @@ int Main(vector<string>& args) {
 						system("pause");
 					}
 				}
-				else if(cmd == "-set") {
-					string key, value;
-					cin >> key >> value;
-					settings[key] = value;
+			}
+			else if(curr[0] == '0') {
+				if(hintUnlock) {
+					useHint();
+				}
+				else {
+					UserError("无效的猜测:提示未解锁或已使用。\n本次猜测不计数。");
 				}
 			}
+			else if(curr[0] == '1') {
+				showHelp();
+			}
+			else if(curr[0] == '2') {
+				showHelp(2);
+			}
+			else if(settings["Debug"] == "1" && curr[0] == '3') {
+				showHelp(3);
+			}
+			else if(!isalpha(curr[0])) {
+				UserError("无效的猜测:输入字符非字母。\n本次猜测不计数。");
+			}
+			else if(guessed[curr[0]]) {
+				UserError("无效的猜测:你已经猜过这个字母了。\n本次猜测不计数。");
+			}
 			else {
+				guessed[toupper(curr[0])] = guessed[tolower(curr[0])] = true;
+				int retU = update(toupper(curr[0]));
+				int retL = update(tolower(curr[0]));
 				CLS;
-				bool flag = true;
-				for(char c : word) {
-					if(c != ' ' && c != '-' && c != '\'' && !isalpha(c)) {
-						flag = false;
-						break;
-					}
+				if(retL + retU != 0) {
+					cnt += retU + retL;
+					printf("正确! 单词中共包含 %d 个字母 %c 和 %d 个字母 %c。\n", retU, char(toupper(curr[0])), retL, char(tolower(curr[0])));
+					printf("还有%d个未知字母。", clen - cnt);
+					if(settings["Flash"] == "1") dis_color(true, 1500);
+					else Sleep(1500);
 				}
-				if(!flag || curr.length() != word.length())
-					UserError("无效的猜词:输入格式非法。\n本次猜词不计数。");
 				else {
-					if(curr == word) {
-						ending("恭喜! 提前猜词成功", true);
-						start();
-						continue;
+					if(cnt == 0) {
+						cout << "错误! 失去 0 点生命值。" << endl;
+						cout << "猜出第一个字母前不会扣除生命值。";
+						Sleep(1000);
 					}
 					else {
-						cout << "猜词失败，失去2点生命值";
+						hp--;
+						cout << "错误! 失去 1 点生命值。";
 						if(settings["Flash"] == "1") dis_color(false);
 						else Sleep(1000);
-						hp -= 2;
 					}
+				}
+			}
+		}
+		else {
+			CLS;
+			bool flag = true;
+			for(char c : word) {
+				if(c != ' ' && c != '-' && c != '\'' && !isalpha(c)) {
+					flag = false;
+					break;
+				}
+			}
+			if(!flag || curr.length() != word.length())
+				UserError("无效的猜词:输入格式非法。\n本次猜词不计数。");
+			else {
+				if(curr == word) {
+					ending("恭喜! 提前猜词成功", true);
+					start();
+					continue;
+				}
+				else {
+					cout << "猜词失败，失去 2 点生命值";
+					if(settings["Flash"] == "1") dis_color(false);
+					else Sleep(1000);
+					hp -= 2;
 				}
 			}
 		}

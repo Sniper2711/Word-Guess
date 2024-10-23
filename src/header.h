@@ -73,12 +73,11 @@ void showHelp(int type = 1) {
 			break;
 		case 3:
 			system("cls");
-			cout << "How to open commend mode: enter \"-cmd\"" << endl;
+			cout << "How to open commend mode: enter \"-\"" << endl;
 			cout << "Argument format: <Name:Type>" << endl;
 			cout << "Mandatory / Optional arguments: <Mandatory>, [Optional]" << endl;
 			cout << "Command usage:" << endl;
 			cout << "-var <key:string> <value> : Assign variable <key:string> of <value>. Assignable variables: hp, hintUsed." << endl;
-			cout << "-set <key:string> <value:string> : Set system setting <key> to <value:string>, custom settings are acceptable(but useless)." << endl;
 			system("pause");
 			break;
 	}
@@ -93,11 +92,30 @@ int update(char t) {
 	}
 	return ret;
 }
+void useHint() {
+	char target, targeto;
+	for(int i = 0;i < len;i++) {
+		if(!Corr[i]) {
+			target = word[i];
+			targeto = isupper(target) ? tolower(target) : toupper(target);
+			break;
+		}
+	}
+	guessed[target] = guessed[targeto] = true;
+	int ret = update(target);
+	ret += update(targeto);
+	cnt += ret;
+	hintUsed = true;
+	CLS;
+	printf("提示已使用，单词中共包含%d个字母%c或%c。\n", ret, char(toupper(target)), char(tolower(target)));
+	printf("还有%d个未知字母。", clen - cnt);
+	Sleep(2000);
+}
 char judgeResult() {
 	if(hp == 10) return 'E'; // Excellent
 	else if(hp <= 9 && hp >= 7) return 'A';
 	else if(hp <= 6 && hp >= 4) return 'B';
-	else if(hp <= 1 && hp >= 3) return 'C';
+	else if(hp <= 3 && hp >= 1) return 'C';
 	else if(hp == 0 || hp == -1) return 'F'; // Fail
 	else return 'U'; // Unknown
 }
