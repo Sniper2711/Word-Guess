@@ -21,26 +21,11 @@ int Main(vector<string>& args) {
 			continue;
 		}
 		getline(cin, curr);
-		if(curr.length() == 1) {
+		if(curr.length() == 0)
+			UserError("无效：未输入内容。");
+		else if(curr.length() == 1) {
 			if(settings["Debug"] == "1" && curr == "-") {
-				string cmd;
-				cout << endl << ">>";
-				cin >> cmd;
-				if(cmd == "-var") {
-					string key;
-					int value;
-					cin >> key >> value;
-					if(key == "hp") {
-						hp = value;
-					}
-					else if(key == "hintUsed") {
-						hintUsed = value;
-					}
-					else {
-						cout << "Invaild key and value." << endl;
-						system("pause");
-					}
-				}
+				debugCmd();
 			}
 			else if(curr[0] == '0') {
 				if(hintUnlock) {
@@ -78,17 +63,10 @@ int Main(vector<string>& args) {
 					else Sleep(1500);
 				}
 				else {
-					if(cnt == 0) {
-						cout << "错误! 失去 0 点生命值。" << endl;
-						cout << "猜出第一个字母前不会扣除生命值。";
-						Sleep(1000);
-					}
-					else {
-						hp--;
-						cout << "错误! 失去 1 点生命值。";
-						if(settings["Flash"] == "1") dis_color(false);
-						else Sleep(1000);
-					}
+					hp--;
+					cout << "错误! 失去 1 点生命值。";
+					if(settings["Flash"] == "1") dis_color(false);
+					else Sleep(1000);
 				}
 			}
 		}
@@ -118,27 +96,7 @@ int Main(vector<string>& args) {
 			}
 		}
 		cin.sync();
-		if(hp <= 5 && clen - cnt > 2 && !hintUsed)
-			hintUnlock = true;
-		else
-			hintUnlock = false;
-		CLS;
-		if(settings["Debug"] == "1") showDebugInfo();
-		printf("当前生命值: %d/10\n", hp);
-		printf("猜出字母/总字母个数: %d/%d\n", cnt, clen);
-		cout << "单词状态: ";
-		for(int i = 0;i < len;i++) {
-			if(Corr[i]) cout << word[i];
-			else cout << '_';
-		}
-		cout << endl << "已经猜过的字符（字母包括大小写）:" << endl;
-		for(char c = 'a';c <= 'z';c++) {
-			if(guessed[c]) cout << c << ' ';
-		}
-		cout << endl << "如果你有把握直接猜出词语，输入词语并回车确定。" << endl;
-		if(hintUnlock) cout << "**提示已解锁，需要提示请输入0**" << endl;
-		cout << "**如果不知道怎么玩，请输入1**";
-		cout << endl << "请输入单个字母(猜测)/整个单词(直接猜词)/数字命令(详见帮助):";
+		newturn();
 	}
 	return 0;
 }

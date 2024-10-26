@@ -32,8 +32,17 @@ void launchInit() {
 		exit(1);
 	}
 	while(!ifs.eof() && getline(ifs, temp)) {
-		if(temp.length() <= 4 || temp.length() >= 16) continue; // Single word length: 5-15
-		words.push_back(temp);
+		string wd, mn;
+		for(int i = 0;i < temp.length();i++) {
+			if(temp[i] == ' ') {
+				wd = temp.substr(0, i);
+				mn = temp.substr(i+1);
+				break;
+			}
+		}
+		if(wd.length() <= 5 || wd.length() >= 16) continue; // Single word length: 6-15
+		words.push_back(wd);
+		meanings[wd] = mn;
 	}
 	ifs.close();
 	CLS;
@@ -80,7 +89,7 @@ void start() {
 	cout << "单词字母个数: " << clen << endl;
 	cout << "单词状态: ";
 	for(int i = 0;i < len;i++) {
-		if(!isalpha(word[i])) cout << word[i];
+		if(Corr[i]) cout << word[i];
 		else cout << '_';
 	}
 	cout << endl << "\n**如果不知道怎么玩，请输入1**";
@@ -92,6 +101,8 @@ void ending(string message, bool win = true) {
 	if(settings["Flash"] == "1") dis_color(win, 750);
 	cout << "正确的单词是:" << endl;
 	cout << word << endl;
+	cout << "它的中文含义是：" << endl;
+	cout << meanings[word] << endl;
 	printf("生命值: %d/10\n", hp);
 	printf("猜出字母: %d/%d (%d%%)\n", cnt, clen, (cnt * 100 / clen));
 	cout << "等阶/评级.";
@@ -104,21 +115,24 @@ void ending(string message, bool win = true) {
 		case 'E':
 			if(settings["Flash"] == "1") system("color 90");
 			Ex();
-			cout << "   Excellent - 完美" << endl;
+			cout << "   Excellent 排名第1" << endl;
 			break;
 		case 'A':
 			A();
+			cout << "     A 排名第2" << endl;
 			break;
 		case 'B':
 			B();
+			cout << "     B 排名第3" << endl;
 			break;
 		case 'C':
 			C();
+			cout << "     C 排名第4" << endl;
 			break;
 		case 'F':
 			if(settings["Flash"] == "1") system("color C0");
 			F();
-			cout << "      Fail - 失败" << endl;
+			cout << "    Fail - 失败" << endl;
 			break;
 		default:
 			U();
@@ -128,4 +142,27 @@ void ending(string message, bool win = true) {
 	}
 	cout << "退出游戏请关闭窗口，按任意键重新开始。" << endl;
 	system("pause");
+}
+void newturn() {
+	if(hp <= 5 && clen - cnt > 2 && !hintUsed)
+		hintUnlock = true;
+	else
+		hintUnlock = false;
+	CLS;
+	if(settings["Debug"] == "1") showDebugInfo();
+	printf("当前生命值: %d/10\n", hp);
+	printf("猜出字母/总字母个数: %d/%d\n", cnt, clen);
+	cout << "单词状态: ";
+	for(int i = 0;i < len;i++) {
+		if(Corr[i]) cout << word[i];
+		else cout << '_';
+	}
+	cout << endl << "已经猜过的字符（字母包括大小写）:" << endl;
+	for(char c = 'a';c <= 'z';c++) {
+		if(guessed[c]) cout << c << ' ';
+	}
+	cout << endl << "如果你有把握直接猜出词语，输入词语并回车确定。" << endl;
+	if(hintUnlock) cout << "**提示已解锁，需要提示请输入0**" << endl;
+	cout << "**如果不知道怎么玩，请输入1**";
+	cout << endl << "请输入单个字母(猜测)/整个单词(直接猜词)/数字命令(详见帮助):";
 }

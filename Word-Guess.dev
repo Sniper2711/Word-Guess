@@ -33,20 +33,20 @@ UnitCount=6
 
 [VersionInfo]
 Major=1
-Minor=4
+Minor=5
 Release=5
-Build=173
+Build=190
 LanguageID=2052
 CharsetID=1252
 CompanyName=
-FileVersion=1.4.5.173
+FileVersion=1.5.5.190
 FileDescription=Word-Guess Main Program
 InternalName=
 LegalCopyright=
 LegalTrademarks=
 OriginalFilename=
 ProductName=Word-Guess Game
-ProductVersion=1.4.5.173
+ProductVersion=1.5.5.190
 AutoIncBuildNr=1
 SyncProduct=1
 
