@@ -1,0 +1,47 @@
+# Language File en_us
+en_us;
+
+-WordGuessGame.UserError=User Error:
+-WordGuessGame.Start.Success=Started a game successfully.
+-WordGuessGame.Start.Gameisrunning=A game is already running!
+-WordGuessGame.End.Invaild=Cannot finish the game: The conditions have not been met.
+-WordGuessGame.End.Win=Game over, you win!
+-WordGuessGame.End.Lose=Game over, you lose.
+-WordGuessGame.Rank.Excellent=   Excellent Ranked 1st
+-WordGuessGame.Rank.A=     A Ranked 2nd
+-WordGuessGame.Rank.B=     B Ranked 3rd
+-WordGuessGame.Rank.C=     C Ranked 4th
+-WordGuessGame.Rank.Fail=         Fail
+-WordGuessGame.Rank.Unknown=           Unknown
+-WordGuessGame.Rank.Unknown.Warn=**Please note that, you have got an unknown ranking. If the debug mode is not enabled, there is a problem with it. Please send a feedback to the author.**
+-WordGuessGame.Input.Nothing=You did not input anything.
+-WordGuessGame.GuessAlpha.Invaild=Invaild guessing: The character inputed is not an alphabet.
+-WordGuessGame.GuessAlpha.Guessed=Invaild guessing: You have already guessed this letter.
+-WordGuessGame.GuessAlpha.Fail=Guessing alphabet failed. You will lose 1 HP.
+-WordGuessGame.GuessAlpha.Success=Guessing alphabet succeeded! There are {} letter {} and {} letter {}.
+-WordGuessGame.GuessWord.Invaild=Invaild word-guessing: Illegal input format.
+-WordGuessGame.GuessWord.Fail=Guessing word failed. You will lose 2 HP.
+-WordGuessGame.GuessWord.Success=Guessing word succeeded! 
+-WordGuessGame.Hint.Unlocked=**The hint is now available. Input 0 to use it.**
+-WordGuessGame.Hint.Unavailable=The hint is now unavailable.
+-WordGuessGame.Hint.Used=The hint has been used once.
+-WordGuessGame.Hint.Success=The hint is used. The first unknown letter has been unlocked: {} and {}.
+
+-WordGuessGame.Text.Load:1=Welcome to the Word-Guess Game!
+-WordGuessGame.Text.Load:2=Playing skill: Guess the possible letters in the word and make the final guess after you make sure the entire word.
+-WordGuessGame.Text.Load:3=If you want to get more helping information, enter 1 later.
+-WordGuessGame.Text.Load:4=For details on settings, please go to settings.txt in the source file directory.
+-WordGuessGame.Text.Turn:1=Current HP: {}/10
+-WordGuessGame.Text.Turn:2=Guessed alphabet(s)/Total alphabet(s): {}/{}
+-WordGuessGame.Text.Turn:3=Word:
+-WordGuessGame.Text.Turn:4=Guessed alphabet(s) (Includes both uppercase and lowercase):
+-WordGuessGame.Text.Turn:5=You can input one character to guess a single letter, or enter the whole word.
+-WordGuessGame.Text.Turn:6=**You can input 1 to get help**
+-WordGuessGame.Text.Turn:7=Enter a single letter(To guess)/The whole word(To guess the word directly)/Number commands(Check them in the help):
+-WordGuessGame.Text.Interact:1={} unknown letter(s) remaining.
+-WordGuessGame.Text.End:1=The correct word is: {}
+-WordGuessGame.Text.End:2=Its Chinese meaning is: {}
+-WordGuessGame.Text.End:3=HP: {}/10
+-WordGuessGame.Text.End:4=Shown letter(s): {}/{} ({:.2f}%)
+-WordGuessGame.Text.End:5=Level/Ranking
+-WordGuessGame.Text.End:6=If you want to exit the game, simply close this window. Or press any key to restart.

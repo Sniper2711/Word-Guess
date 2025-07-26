@@ -1,49 +1,103 @@
-#include <bits/stdc++.h>
+#ifndef _HEADER_H_
+#define _HEADER_H_
+
+
 #include <windows.h>
+#include "SettingList.h"
+#include "Translator.h"
 using namespace std;
 #define CLS system("cls")
-string word, temp, curr;
-int len, clen, r, cnt, hp = 10;
-bool Corr[15], hintUnlock = false, hintUsed = false;
-unordered_map<char, bool> guessed;
-unordered_map<string, string> settings;
-unordered_map<string, string> meanings;
-vector<string> words;
-void dis_color(bool correct, int mtime = 1000) {
-	system((correct ? "color 27" : "color 47"));
-	Sleep(mtime);
+Translator translator;
+SettingList<int> IntSettingList;
+SettingList<string> StringSettingList;
+void color() {
+	// no arguments: reset all color
 	system("color 07");
 }
-void UserError(string info, int mtime = 1000) {
-	system("cls");
-	cout << "错误:" << info;
+void color(string text, string background) {
+	// background color
+	string cmd = "color ";
+	if(background == "black") cmd += '0';
+	else if(background == "blue") cmd += '1';
+	else if(background == "green") cmd += '2';
+	else if(background == "light_green") cmd += '3';
+	else if(background == "red") cmd += '4';
+	else if(background == "purple") cmd += '5';
+	else if(background == "yellow") cmd += '6';
+	else if(background == "white") cmd += '7';
+	else if(background == "grey") cmd += '8';
+	else if(background == "pale_blue") cmd += '9';
+	else if(background == "pale_green") cmd += 'A';
+	else if(background == "pale_light_green") cmd += 'B';
+	else if(background == "pale_red") cmd += 'C';
+	else if(background == "pale_purple") cmd += 'D';
+	else if(background == "pale_yellow") cmd += 'E';
+	else if(background == "bright_white") cmd += 'F';
+	// text color
+	if(text == "black") cmd += '0';
+	else if(text == "blue") cmd += '1';
+	else if(text == "green") cmd += '2';
+	else if(text == "light_green") cmd += '3';
+	else if(text == "red") cmd += '4';
+	else if(text == "purple") cmd += '5';
+	else if(text == "yellow") cmd += '6';
+	else if(text == "white") cmd += '7';
+	else if(text == "grey") cmd += '8';
+	else if(text == "pale_blue") cmd += '9';
+	else if(text == "pale_green") cmd += 'A';
+	else if(text == "pale_light_green") cmd += 'B';
+	else if(text == "pale_red") cmd += 'C';
+	else if(text == "pale_purple") cmd += 'D';
+	else if(text == "pale_yellow") cmd += 'E';
+	else if(text == "bright_white") cmd += 'F';
+	system(cmd.c_str());
+}
+void color(string text, string background, int milisecond) {
+	// background color
+	string cmd = "color ";
+	if(background == "black") cmd += '0';
+	else if(background == "blue") cmd += '1';
+	else if(background == "green") cmd += '2';
+	else if(background == "light_green") cmd += '3';
+	else if(background == "red") cmd += '4';
+	else if(background == "purple") cmd += '5';
+	else if(background == "yellow") cmd += '6';
+	else if(background == "white") cmd += '7';
+	else if(background == "grey") cmd += '8';
+	else if(background == "pale_blue") cmd += '9';
+	else if(background == "pale_green") cmd += 'A';
+	else if(background == "pale_light_green") cmd += 'B';
+	else if(background == "pale_red") cmd += 'C';
+	else if(background == "pale_purple") cmd += 'D';
+	else if(background == "pale_yellow") cmd += 'E';
+	else if(background == "bright_white") cmd += 'F';
+	// text color
+	if(text == "black") cmd += '0';
+	else if(text == "blue") cmd += '1';
+	else if(text == "green") cmd += '2';
+	else if(text == "light_green") cmd += '3';
+	else if(text == "red") cmd += '4';
+	else if(text == "purple") cmd += '5';
+	else if(text == "yellow") cmd += '6';
+	else if(text == "white") cmd += '7';
+	else if(text == "grey") cmd += '8';
+	else if(text == "pale_blue") cmd += '9';
+	else if(text == "pale_green") cmd += 'A';
+	else if(text == "pale_light_green") cmd += 'B';
+	else if(text == "pale_red") cmd += 'C';
+	else if(text == "pale_purple") cmd += 'D';
+	else if(text == "pale_yellow") cmd += 'E';
+	else if(text == "bright_white") cmd += 'F';
+	system(cmd.c_str());
+	Sleep(milisecond);
+	system("color 07");
+}
+void UserError(string id, int mtime = 2000) {
+	CLS;
+	cout << translator.translate("WordGuessGame.UserError") << translator.translate(id);
 	Sleep(mtime);
 }
-int gameStatus() {
-	if(cnt == clen) return 1;
-	if(hp <= 0) {
-		hp = 0;
-		return -1;
-	}
-	return 0;
-}
-void showDebugInfo() {
-	cout << "------Debug Info------" << endl;
-	cout << "Word: " << word << endl;
-	printf("Word length and alpha length: %d, %d\n", len, clen);
-	printf("Health: %d\n", hp);
-	printf("Guessed: %d/%d (%d%%)\n", cnt, clen, cnt * 100 / clen);
-	printf("Hint Unlock and Used: %d, %d\n", hintUnlock, hintUsed);
-	cout << "Characters guessed:" << endl;
-	for(int i = 0;i < len;i++) printf("%d ", Corr[i]);
-	cout << endl << "Guessed alphas:" << endl;
-	for(char c = 'a';c <= 'z';c++) if(guessed[c]) cout << c << ' ';
-	cout << endl << "Settings:" << endl;
-	for(pair<string, string> s : settings) cout << s.first << '=' << s.second << endl;
-	cout << endl << "To view debug command help, enter 3." << endl;
-	cout << "------Debug Info------" << endl;
-}
-void showHelp(int type = 1) {
+void showhelp(int type) {
 	switch(type) {
 		case 1:
 			system("cls");
@@ -64,9 +118,9 @@ void showHelp(int type = 1) {
 		case 2:
 			system("cls");
 			cout << "剩余生命值  评级" << endl;
-			cout << "10          Excellent" << endl;
-			cout << "9--7        A" << endl;
-			cout << "6--4        B" << endl;
+			cout << "10--9       Excellent" << endl;
+			cout << "8--6        A" << endl;
+			cout << "5--4        B" << endl;
 			cout << "3--1        C" << endl;
 			cout << "0           Fail" << endl;
 			cout << "其他        Unknown" << endl;
@@ -83,60 +137,26 @@ void showHelp(int type = 1) {
 			break;
 	}
 }
-int update(char t) {
-	int ret = 0;
-	for(int i = 0;i < word.length();i++) {
-		if(word.at(i) == t) {
-			ret++;
-			Corr[i] = true;
-		}
-	}
-	return ret;
-}
-void useHint() {
-	char target, targeto;
-	for(int i = 0;i < len;i++) {
-		if(!Corr[i]) {
-			target = word[i];
-			targeto = isupper(target) ? tolower(target) : toupper(target);
-			break;
-		}
-	}
-	guessed[target] = guessed[targeto] = true;
-	int ret = update(target);
-	ret += update(targeto);
-	cnt += ret;
-	hintUsed = true;
-	CLS;
-	printf("提示已使用，单词中共包含%d个字母%c或%c。\n", ret, char(toupper(target)), char(tolower(target)));
-	printf("还有%d个未知字母。", clen - cnt);
-	Sleep(2000);
-}
-void debugCmd() {
-	string cmd;
-	cout << endl << ">>";
-	cin >> cmd;
-	if(cmd == "-var") {
-		string key;
-		int value;
-		cin >> key >> value;
-		if(key == "hp") {
-			hp = value;
-		}
-		else if(key == "hintUsed") {
-			hintUsed = value;
-		}
-		else {
-			cout << "Invaild key and value." << endl;
-			system("pause");
-		}
-	}
-}
-char judgeResult() {
-	if(hp == 10) return 'E'; // Excellent
-	else if(hp <= 9 && hp >= 7) return 'A';
-	else if(hp <= 6 && hp >= 4) return 'B';
-	else if(hp <= 3 && hp >= 1) return 'C';
-	else if(hp == 0 || hp == -1) return 'F'; // Fail
-	else return 'U'; // Unknown
-}
+// void debugCmd() {
+// 	string cmd;
+// 	cout << endl << ">>";
+// 	cin >> cmd;
+// 	if(cmd == "-var") {
+// 		string key;
+// 		int value;
+// 		cin >> key >> value;
+// 		if(key == "hp") {
+// 			hp = value;
+// 		}
+// 		else if(key == "hintUsed") {
+// 			hintUsed = value;
+// 		}
+// 		else {
+// 			cout << "Invaild key and value." << endl;
+// 			system("pause");
+// 		}
+// 	}
+// }
+
+
+#endif
