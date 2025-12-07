@@ -25,9 +25,13 @@ class Translator {
             if(languages.count(language) && languages[language]) return;
             languages[language] = true;
         }
-        void add_message(string language, string id, string message) {
+        void add_message(string language, string id, string message, bool NewLineIfDuplicated = true) {
             if(!languages.count(language) || !languages[language]) return;
-            translations[language][id] = message;
+            if(translations[language].count(id) == 1) {
+                if(NewLineIfDuplicated) translations[language][id] += '\n';
+                translations[language][id] += message;
+            }
+            else translations[language][id] = message;
         }
         int select(string language) {
             if(languages.count(language) && languages[language]) {

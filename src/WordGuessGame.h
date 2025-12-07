@@ -101,14 +101,15 @@ class WordGuessGame {
                 }
                 ifs.close();
             }
-            if(IntSettingList.get("Debug") == 1) ifs.open(StringSettingList.get("DebugInputFile"));
-            else ifs.open("words.txt");
+            ifs.open(StringSettingList.get("CustomInputFile"));
+            if(!ifs.is_open()) ifs.open("words.txt");
             if(!ifs.is_open()) {
                 throw WordGuessException("Failed to open input file. Error opening words input file.");
                 exit(1);
             }
             while(!ifs.eof()) {
                 getline(ifs, temp);
+                if(temp[0] == '#') continue;
                 string wd, mn;
                 for(int i = 0;i < temp.length();i++) {
                     if(temp[i] == ' ') {
@@ -120,6 +121,10 @@ class WordGuessGame {
                 if(wd.length() <= 5 || wd.length() >= 16) continue; // Single word length: 6-15
                 words.push_back(wd);
                 meanings[wd] = mn;
+            }
+            if(!words.size()) {
+                throw WordGuessException("Load game failed. No contents in words input file.");
+                exit(1);
             }
             ifs.close();
         }
@@ -134,6 +139,9 @@ class WordGuessGame {
             if(hp <= 5 && alphalen - count > 2 && !hintUsed) hintAvailable = true;
             else hintAvailable = false;
             return 0;
+        }
+        void GiveUp() {
+            this->status = 0, this->hp = 0;
         }
         InteractResult Start() {
             if(status != 0) return InteractResult("Start", 0, "WordGuessGame.Start.Gameisrunning");

@@ -15,10 +15,7 @@ int Main(vector<string>& args) {
 	START:
 	CLS;
 	color();
-	cout << translator.translate("WordGuessGame.Text.Load:1");
-	cout << translator.translate("WordGuessGame.Text.Load:2");
-	cout << translator.translate("WordGuessGame.Text.Load:3");
-	cout << translator.translate("WordGuessGame.Text.Load:4");
+	cout << translator.translate("WordGuessGame.Text.Load");
 	system("pause");
 	CLS;
 	Game.Start();
@@ -54,7 +51,7 @@ int Main(vector<string>& args) {
 			cout << translator.translate("WordGuessGame.Text.End:5", false);
 			for(int i = 1;i <= 3;i++) {
 				cout << '.';
-				Sleep(500);
+				Sleep(250);
 			}
 			cout << '\n';
 			switch(GameStatus["hp"]) {
@@ -62,35 +59,35 @@ int Main(vector<string>& args) {
 				case 9:
 					if(IntSettingList.get("Flash") == 1) color("black", "pale_blue");
 					Ex();
-					cout << translator.translate("WordGuessGame.Rank.Excellent");
+					cout << translator.translate("WordGuessGame.Rating.Excellent");
 					break;
 				case 8:
 				case 7:
 				case 6:
 					A();
-					cout << translator.translate("WordGuessGame.Rank.A");
+					cout << translator.translate("WordGuessGame.Rating.A");
 					break;
 				case 5:
 				case 4:
 					B();
-					cout << translator.translate("WordGuessGame.Rank.B");
+					cout << translator.translate("WordGuessGame.Rating.B");
 					break;
 				case 3:
 				case 2:
 				case 1:
 					C();
-					cout << translator.translate("WordGuessGame.Rank.C");
+					cout << translator.translate("WordGuessGame.Rating.C");
 					break;
 				case 0:
 				case -1:
-					if(IntSettingList.get("Flash") == 1) color("white", "pale_red");
+					if(IntSettingList.get("Flash") == 1) color("black", "pale_red");
 					F();
-					cout << translator.translate("WordGuessGame.Rank.Fail");
+					cout << translator.translate("WordGuessGame.Rating.Fail");
 					break;
 				default:
 					U();
-					cout << translator.translate("WordGuessGame.Rank.Unknown");
-					cout << translator.translate("WordGuessGame.Rank.Unknown.Warn");
+					cout << translator.translate("WordGuessGame.Rating.Unknown");
+					cout << translator.translate("WordGuessGame.Rating.Unknown.Warn");
 					break;
 			}
 			cout << translator.translate("WordGuessGame.Text.End:6");
@@ -116,16 +113,28 @@ int Main(vector<string>& args) {
 		}
 		if(input.length() == 1) {
 			char Char = input[0];
-			if(IntSettingList.get("Debug") == 1) {
-				switch(Char) {
-					// case '-':
-					// 	debugCmd();
-					// 	break;
-					case '3':
-						showhelp(3);
-						break;
+			if(Char == '/') {
+				string confirm;
+				cout << translator.translate("WordGuessGame.Text.GiveUp:1");
+				cout << translator.translate("WordGuessGame.Text.GiveUp:2");
+				getline(cin, confirm);
+				if(confirm.length() == 1 && confirm[0] == '/') {
+					CLS;
+					Game.GiveUp();
+					goto TURN;
 				}
+				else goto TURN;
 			}
+			// if(IntSettingList.get("Debug") == 1) {
+				// switch(Char) {
+				// 	case '-':
+				// 		debugCmd();
+				// 		break;
+				// 	case '3':
+				// 		showhelp(3);
+				// 		goto TURN;
+				// }
+			// }
 			if(Char >= '0' && Char <= '9') {
 				switch(Char) {
 					case '0':
@@ -134,8 +143,16 @@ int Main(vector<string>& args) {
 						else cout << format(runtime_format(translator.translate(result.id)), char(result.Hint_upper), char(result.Hint_lower));
 						break;
 					case '1':
+						cout << translator.translate("WordGuessGame.Help.Basic");
+						system("pause");
+						goto TURN;
 					case '2':
-						showhelp(Char - '0');
+						cout << translator.translate("WordGuessGame.Help.Rating");
+						system("pause");
+						goto TURN;
+					case '4':
+						cout << translator.translate("WordGuessGame.Help.Interact");
+						system("pause");
 						goto TURN;
 				}
 			}
@@ -167,9 +184,10 @@ int Main(vector<string>& args) {
 			}
 			else if(result.code == 0) if(IntSettingList.get("Flash") == 1) color("white", "red");
 		}
-		cin.sync();
+		TURN_END:
+		// cin.sync();
 		GameStatus = Game.GetGameStatus();
-		cout << format(runtime_format(translator.translate("WordGuessGame.Text.Interact:1")), GameStatus["alphalen"] - GameStatus["count"]);
+		cout << format(runtime_format(translator.translate("WordGuessGame.Text.InteractResult")), GameStatus["alphalen"] - GameStatus["count"]);
 		Sleep(1750);
 	}
 	return 0;

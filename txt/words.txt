@@ -1,3 +1,4 @@
+# 版本：v1.6.0-pre
 abandon 放弃
 absolutely 绝对地
 accept 接受

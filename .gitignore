@@ -1,2 +1,7 @@
 /Output/
 /Word-Guess.layout
+/.vscode/
+/build/
+/CMakeLists.txt
+WordTester*
+Word-Guess.code-workspace
