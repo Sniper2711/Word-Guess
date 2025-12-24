@@ -46,7 +46,7 @@ int Main(vector<string>& args) {
 			cout << format(runtime_format(translator.translate("WordGuessGame.Text.End:2")), result.End_meaning);
 			cout << format(runtime_format(translator.translate("WordGuessGame.Text.End:3")), GameStatus["hp"]);
 			Sleep(250);
-			cout << format(runtime_format(translator.translate("WordGuessGame.Text.End:4")), GameStatus["count"], GameStatus["alphalen"], (GameStatus["count"] * 100.0) / GameStatus["alphalen"]);
+			cout << format(runtime_format(translator.translate("WordGuessGame.Text.End:4")), (result.code ? GameStatus["alphalen"] : GameStatus["count"]), GameStatus["alphalen"], ((result.code ? GameStatus["alphalen"] : GameStatus["count"]) * 100.0) / GameStatus["alphalen"]);
 			Sleep(250);
 			cout << translator.translate("WordGuessGame.Text.End:5", false);
 			for(int i = 1;i <= 3;i++) {
@@ -59,35 +59,35 @@ int Main(vector<string>& args) {
 				case 9:
 					if(IntSettingList.get("Flash") == 1) color("black", "pale_blue");
 					Ex();
-					cout << translator.translate("WordGuessGame.Rating.Excellent");
+					// cout << translator.translate("WordGuessGame.Rating.Excellent");
 					break;
 				case 8:
 				case 7:
 				case 6:
 					A();
-					cout << translator.translate("WordGuessGame.Rating.A");
+					// cout << translator.translate("WordGuessGame.Rating.A");
 					break;
 				case 5:
 				case 4:
 					B();
-					cout << translator.translate("WordGuessGame.Rating.B");
+					// cout << translator.translate("WordGuessGame.Rating.B");
 					break;
 				case 3:
 				case 2:
 				case 1:
 					C();
-					cout << translator.translate("WordGuessGame.Rating.C");
+					// cout << translator.translate("WordGuessGame.Rating.C");
 					break;
 				case 0:
 				case -1:
 					if(IntSettingList.get("Flash") == 1) color("black", "pale_red");
 					F();
-					cout << translator.translate("WordGuessGame.Rating.Fail");
+					// cout << translator.translate("WordGuessGame.Rating.Fail");
 					break;
 				default:
 					U();
-					cout << translator.translate("WordGuessGame.Rating.Unknown");
-					cout << translator.translate("WordGuessGame.Rating.Unknown.Warn");
+					// cout << translator.translate("WordGuessGame.Rating.Unknown");
+					// cout << translator.translate("WordGuessGame.Rating.Unknown.Warn");
 					break;
 			}
 			cout << translator.translate("WordGuessGame.Text.End:6");
@@ -115,8 +115,7 @@ int Main(vector<string>& args) {
 			char Char = input[0];
 			if(Char == '/') {
 				string confirm;
-				cout << translator.translate("WordGuessGame.Text.GiveUp:1");
-				cout << translator.translate("WordGuessGame.Text.GiveUp:2");
+				cout << translator.translate("WordGuessGame.Text.GiveUp");
 				getline(cin, confirm);
 				if(confirm.length() == 1 && confirm[0] == '/') {
 					CLS;

@@ -11,11 +11,11 @@ Translator translator;
 SettingList<int> IntSettingList;
 SettingList<string> StringSettingList;
 void color() {
-	// no arguments: reset all color
+	// 未提供任何参数：重置颜色为启动时的颜色
 	system("color 07");
 }
 void color(string text, string background) {
-	// background color
+	// 背景
 	string cmd = "color ";
 	if(background == "black") cmd += '0';
 	else if(background == "blue") cmd += '1';
@@ -33,7 +33,7 @@ void color(string text, string background) {
 	else if(background == "pale_purple") cmd += 'D';
 	else if(background == "pale_yellow") cmd += 'E';
 	else if(background == "bright_white") cmd += 'F';
-	// text color
+	// 文字
 	if(text == "black") cmd += '0';
 	else if(text == "blue") cmd += '1';
 	else if(text == "green") cmd += '2';
@@ -53,7 +53,7 @@ void color(string text, string background) {
 	system(cmd.c_str());
 }
 void color(string text, string background, int milisecond) {
-	// background color
+	// 背景
 	string cmd = "color ";
 	if(background == "black") cmd += '0';
 	else if(background == "blue") cmd += '1';
@@ -71,7 +71,7 @@ void color(string text, string background, int milisecond) {
 	else if(background == "pale_purple") cmd += 'D';
 	else if(background == "pale_yellow") cmd += 'E';
 	else if(background == "bright_white") cmd += 'F';
-	// text color
+	// 文字
 	if(text == "black") cmd += '0';
 	else if(text == "blue") cmd += '1';
 	else if(text == "green") cmd += '2';

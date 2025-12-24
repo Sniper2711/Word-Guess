@@ -15,7 +15,7 @@
 # Flash(1): 控制猜测/猜词/展示评级时是否闪烁屏幕
 Flash=1
 
-# Language(zh_cn): 选择程序的显示语言
+# Language(zh_cn): 选择程序的显示语言，当前支持的：zh_cn、en_us
 Language=en_us
 
 # Debug(0): 调试模式，仅供开发者使用，开启后能够实时监控变量和程序状态

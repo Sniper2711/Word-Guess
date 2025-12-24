@@ -9,15 +9,15 @@
 #include "SettingList.h"
 #include "Header.h"
 using namespace std;
-struct InteractResult {
-    string type, id;
-    int code;
-    int GuessAlpha_upper, GuessAlpha_lower;
-    int Hint_upper, Hint_lower;
-    string End_word, End_meaning;
-    string GetWord_word;
-    unordered_map<string, int> IntReturn;
-    unordered_map<string, string> StringReturn;
+struct InteractResult { // 单次用户交互的返回结构
+    string type, id; // type: 交互类型 id: 交互结果 可能可以直接转译
+    int code; // 结果代码
+    int GuessAlpha_upper, GuessAlpha_lower; // 仅猜测单个字母时生效 返回猜测匹配的（大小写）字母个数
+    int Hint_upper, Hint_lower; // 仅提示时生效 返回提示显示出的字母
+    string End_word, End_meaning; // 仅结束时生效 返回正确单词和它的中文释义
+    string GetWord_word; // 预留的返回 目前作用未知
+    unordered_map<string, int> IntReturn; // 所有整数返回键值对
+    unordered_map<string, string> StringReturn; // 一般返回键值对
     InteractResult(){}
     InteractResult(string type, int code, string id) {
         this->type = type, this->code = code, this->id = id;
@@ -38,13 +38,13 @@ struct InteractResult {
 };
 class WordGuessGame {
     private:
-        int status, hp, len, alphalen, count = 0;
+        int status, hp, len, alphalen, count = 0; // 声明内部变量
         string word;
         bool hintAvailable, hintUsed, show[15];
         unordered_map<char, bool> guessed;
         unordered_map<string, string> meanings;
-        vector<string> words, languages = {"zh_cn", "en_us"};
-        int guessupdate(char t) {
+        vector<string> words, languages = {"zh_cn", "en_us"}; // 可用的语言：中文、英文
+        int guessupdate(char t) { // 对猜测更新，返回匹配的字符个数
             int ret = 0;
             for(int i = 0;i < word.length();i++) {
                 if(word.at(i) == t) {
@@ -55,10 +55,10 @@ class WordGuessGame {
             return ret;
         }
     public:
-        WordGuessGame() {
+        WordGuessGame() { // 游戏初始化
             string temp;
             ifstream ifs;
-            ifs.open("settings.txt");
+            ifs.open("settings.txt"); // 初始化设置
             if(!ifs.is_open()) {
                 throw WordGuessException("Failed to open input file. Error opening file \"settings.txt\"");
                 exit(1);
@@ -77,8 +77,8 @@ class WordGuessGame {
                     }
                 }
             }
-            ifs.close();
-            string language = "unknown", id, message;
+            ifs.close(); // 初始化设置结束
+            string language = "unknown", id, message; // 初始化语言转译
             for(int i = 0;i < languages.size();i++) {
                 ifs.open(languages[i] + ".txt");
                 if(!ifs.is_open()) continue;
@@ -99,9 +99,9 @@ class WordGuessGame {
                         }
                     }
                 }
-                ifs.close();
+                ifs.close(); // 初始化语言转译结束
             }
-            ifs.open(StringSettingList.get("CustomInputFile"));
+            ifs.open(StringSettingList.get("CustomInputFile")); // 初始化单词
             if(!ifs.is_open()) ifs.open("words.txt");
             if(!ifs.is_open()) {
                 throw WordGuessException("Failed to open input file. Error opening words input file.");
@@ -118,7 +118,7 @@ class WordGuessGame {
                         break;
                     }
                 }
-                if(wd.length() <= 5 || wd.length() >= 16) continue; // Single word length: 6-15
+                if(wd.length() <= 5 || wd.length() >= 16) continue; // 单个单词长度限制：6-15（应该在制作单词表时检查完毕）
                 words.push_back(wd);
                 meanings[wd] = mn;
             }
@@ -126,9 +126,9 @@ class WordGuessGame {
                 throw WordGuessException("Load game failed. No contents in words input file.");
                 exit(1);
             }
-            ifs.close();
+            ifs.close(); // 初始化单词结束
         }
-        int step() {
+        int step() { // 游戏步进 并返回当前进行到的阶段
             if(count == alphalen) {
                 return 1;
             }
@@ -140,7 +140,7 @@ class WordGuessGame {
             else hintAvailable = false;
             return 0;
         }
-        void GiveUp() {
+        void GiveUp() { // 放弃
             this->status = 0, this->hp = 0;
         }
         InteractResult Start() {
